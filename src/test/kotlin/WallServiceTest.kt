@@ -1,6 +1,5 @@
 import org.junit.Test
 
-
 internal class WallServiceTest {
 
     @Test
@@ -26,5 +25,20 @@ internal class WallServiceTest {
         postService.add(Post())
         val post: Post = postService.posts[postService.posts.lastIndex]
         assert(!postService.update(post.copy(id = 2)))
+    }
+
+    @Test
+    fun createComment_existsId() {
+        val postService: WallService = WallService()
+        val id: Int = 1
+        postService.add(Post())
+        postService.createComment(Comments(postId = id))
+        assert(postService.posts[id - 1].id == postService.comments[postService.comments.lastIndex].postId)
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun createComment_doesntExistsId() {
+            val postService: WallService = WallService()
+            postService.createComment(Comments(postId = 1))
     }
 }

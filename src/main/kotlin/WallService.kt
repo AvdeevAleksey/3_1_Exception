@@ -1,3 +1,5 @@
+import java.lang.Exception
+
 class WallService {
 
     var id:Int = 0
@@ -44,7 +46,7 @@ class WallService {
             } else {
                 comments += comment.copy(commentId = 1)
             }
-        } else TODO("PostNotFoundException")
+        } else throw Exception("PostNotFoundException")
     }
 
     fun removeById(id: Int): Boolean {
