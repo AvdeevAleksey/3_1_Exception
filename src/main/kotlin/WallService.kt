@@ -2,7 +2,6 @@ import java.lang.Exception
 
 class WallService {
 
-    var id:Int = 0
     var posts = emptyArray<Post>()
     var comments = emptyArray<Comments>()
 
@@ -41,12 +40,14 @@ class WallService {
 
     fun createComment(comment: Comments) {
         if (findById(comment.postId) != null) {
-            if (!comments.isEmpty()) {
-                comments += comment.copy(commentId = comments.last().commentId + 1)
-            } else {
-                comments += comment.copy(commentId = 1)
-            }
-        } else throw NullPointerException("PostNotFoundException")
+            val lastId = if (!comments.isEmpty()) comments.last().commentId + 1 else 1
+            comments += comment.copy(commentId = lastId)
+//            if (!comments.isEmpty()) {
+//                comments += comment.copy(commentId = comments.last().commentId + 1)
+//            } else {
+//                comments += comment.copy(commentId = 1)
+//            }
+        } else throw PostNotFoundException("PostNotFoundException")
     }
 
     fun removeById(id: Int): Boolean {
