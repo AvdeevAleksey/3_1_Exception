@@ -46,7 +46,7 @@ class WallService {
             } else {
                 comments += comment.copy(commentId = 1)
             }
-        } else throw Exception("PostNotFoundException")
+        } else throw NullPointerException("PostNotFoundException")
     }
 
     fun removeById(id: Int): Boolean {

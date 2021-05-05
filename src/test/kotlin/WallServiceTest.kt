@@ -36,7 +36,7 @@ internal class WallServiceTest {
         assert(postService.posts[id - 1].id == postService.comments[postService.comments.lastIndex].postId)
     }
 
-    @Test(expected = PostNotFoundException::class)
+    @Test(expected = NullPointerException::class)
     fun createComment_doesntExistsId() {
             val postService: WallService = WallService()
             postService.createComment(Comments(postId = 1))
